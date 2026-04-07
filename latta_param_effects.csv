@@ -1,0 +1,21 @@
+timestamp,base_data_name,model_name,adaptation_method,selection_method,batch_size,seed,lr,corruption_type,severity,shift_type,latta_anchor_weight,latta_noise_scale,cross_entropy,accuracy_top1
+2026-03-19 10:59:11,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.001,0.0001,1.3968613889589905,63.43
+2026-03-19 11:04:36,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.001,0.001,1.3966494187146425,63.48
+2026-03-19 11:08:19,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.001,0.005,1.3927779147796333,63.53
+2026-03-19 11:13:12,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.001,0.01,1.3950152459070086,63.57
+2026-03-19 11:16:22,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.01,0.0001,1.3925411686614155,63.49
+2026-03-19 11:20:56,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.01,0.001,1.3915871060028673,63.42
+2026-03-19 11:26:49,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.01,0.005,1.3914139870181679,63.47
+2026-03-19 11:30:52,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.01,0.01,1.3913374926030635,63.34
+2026-03-19 11:35:46,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.05,0.0001,1.3894861960381268,62.65
+2026-03-19 11:39:56,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.05,0.001,1.391361918440461,62.49
+2026-03-19 11:42:38,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.05,0.005,1.3887926980346441,62.57
+2026-03-19 11:48:01,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.05,0.01,1.3889483954995872,62.66
+2026-03-19 11:53:32,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.1,0.0001,1.4039841257601977,61.96
+2026-03-19 11:58:49,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.1,0.001,1.4029983018085361,61.99
+2026-03-19 12:04:09,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.1,0.005,1.4041395099908114,61.89
+2026-03-19 12:09:03,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.1,0.01,1.404823517513275,61.93
+2026-03-19 12:11:31,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.5,0.0001,1.5464674317598344,57.15
+2026-03-19 12:13:31,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.5,0.001,1.5468712588042022,57.22
+2026-03-19 12:15:31,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.5,0.005,1.5468212814629079,57.17
+2026-03-19 12:17:31,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,5,synthetic,0.5,0.01,1.5477944568902253,57.21

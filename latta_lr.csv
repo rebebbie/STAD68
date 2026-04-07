@@ -1,0 +1,17 @@
+timestamp,base_data_name,model_name,adaptation_method,selection_method,batch_size,seed,lr,corruption_type,severity,shift_type,latta_anchor_weight,latta_noise_scale,cross_entropy,accuracy_top1
+3/19/2026 13:38,cifar10,resnet26,tent,last_iterate,8,2022,0.001,gaussian_noise,3,synthetic,NA,NA,4.824996425,46.22
+3/19/2026 13:53,cifar10,resnet26,tent,last_iterate,8,2022,0.005,gaussian_noise,3,synthetic,NA,NA,17.42253436,11.32
+3/19/2026 14:08,cifar10,resnet26,tent,last_iterate,8,2022,0.01,gaussian_noise,3,synthetic,NA,NA,16.79761431,14.02
+3/19/2026 14:23,cifar10,resnet26,tent,last_iterate,8,2022,0.05,gaussian_noise,3,synthetic,NA,NA,25.39279033,10.91
+3/19/2026 14:52,cifar10,resnet26,latta,last_iterate,8,2022,0.001,gaussian_noise,3,synthetic,0.01,0.001,3.086197098,53.82
+3/19/2026 15:30,cifar10,resnet26,latta,last_iterate,8,2022,0.005,gaussian_noise,3,synthetic,0.01,0.001,7.531661838,23.77
+3/19/2026 15:47,cifar10,resnet26,latta,last_iterate,8,2022,0.01,gaussian_noise,3,synthetic,0.01,0.001,8.306254442,21.82
+3/19/2026 16:04,cifar10,resnet26,latta,last_iterate,8,2022,0.05,gaussian_noise,3,synthetic,0.01,0.001,8.491807166,15.19
+3/19/2026 17:52,cifar10,resnet26,tent,last_iterate,64,2022,0.001,gaussian_noise,3,synthetic,NA,NA,0.857455389,76.33
+3/19/2026 17:59,cifar10,resnet26,tent,last_iterate,64,2022,0.005,gaussian_noise,3,synthetic,NA,NA,2.204127037,65.55
+3/19/2026 18:05,cifar10,resnet26,tent,last_iterate,64,2022,0.01,gaussian_noise,3,synthetic,NA,NA,5.218485494,48.1
+3/19/2026 18:12,cifar10,resnet26,tent,last_iterate,64,2022,0.05,gaussian_noise,3,synthetic,NA,NA,13.55923369,25.8
+3/19/2026 18:19,cifar10,resnet26,latta,last_iterate,64,2022,0.001,gaussian_noise,3,synthetic,0.01,0.001,0.853453306,76.26
+3/19/2026 18:25,cifar10,resnet26,latta,last_iterate,64,2022,0.005,gaussian_noise,3,synthetic,0.01,0.001,1.244716045,73.82
+3/19/2026 18:32,cifar10,resnet26,latta,last_iterate,64,2022,0.01,gaussian_noise,3,synthetic,0.01,0.001,2.543717419,61.75
+3/19/2026 18:38,cifar10,resnet26,latta,last_iterate,64,2022,0.05,gaussian_noise,3,synthetic,0.01,0.001,5.776518207,35.1

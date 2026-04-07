@@ -1,0 +1,318 @@
+---
+title: "STAD68 GRAPHS"
+format: pdf
+editor: visual
+---
+
+```{r echo=FALSE}
+library(readxl)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+```
+
+# BN_ADAPT
+
+Loading data.
+
+```{r echo=FALSE, message=FALSE}
+bn <- read_csv("bn_adapt.csv") %>% rename(acc = accuracy_top1)
+tent <- read_csv("tent.csv") %>% rename(acc = accuracy_top1)
+
+combined_bn_tent <- bind_rows(bn, tent) %>%
+  mutate(method = ifelse(adaptation_method == "bn_adapt", "BN Adapt", "TENT"))
+```
+
+## Comparing accuracy for [BN_ADAPT]{.underline} vs [TENT]{.underline}.
+
+```{r echo=FALSE}
+ggplot(combined_bn_tent, aes(x = severity, y = acc, colour = method, group = method)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.5) +
+  facet_wrap(~ corruption_type, ncol = 5) +
+  scale_colour_manual(values = c("BN Adapt" = "#de4f1f", "TENT" = "#91c474")) +
+  labs(title = "Accuracy by Severity: BN_Adapt vs TENT",
+       x = "Severity", y = "Accuracy (%)", colour = "Method") +
+  theme_minimal() +
+  theme(plot.caption = element_text(hjust = 0.5))
+```
+
+# COTTA
+
+Pulling from CSV
+
+```{r echo=FALSE}
+
+bsl <- read_excel("TTAB_BASELINE.xlsx")
+cotta <- read_excel("TTAB_COTTA.xlsx")
+
+bsl.1 <- bsl
+bsl.1$type <- paste(bsl.1$corruption_type,bsl.1$severity)
+bsl.1 <- bsl.1 %>% 
+  select(type, accuracy_top1) %>% 
+  rename(acc = accuracy_top1) %>%
+  mutate(dataset = "bsl") 
+
+head(bsl.1)
+
+cotta.1 <- cotta
+cotta.1$type <- paste(cotta.1$corruption_type,cotta.1$severity)
+cotta.1 <- cotta.1 %>%
+  select(type, accuracy_top1) %>% 
+  rename(acc = accuracy_top1) %>%
+  mutate(dataset = "cotta") 
+head(cotta.1)
+
+df1 <- bind_rows(bsl.1, cotta.1)
+df1.1 <- bind_rows(bsl.1, cotta.1)%>%
+  separate(type, into = c("corruption", "severity"), sep = " ", convert = TRUE)
+
+```
+
+## Comparing Accuracy between [BASELINE]{.underline} and [COTTA]{.underline}Creating the graph of their accuracies... two dotted lines.
+
+```{r echo=FALSE}
+ggplot(df1, aes(x = type, y = acc, colour = dataset, group = dataset)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  scale_colour_manual(
+    values = c("bsl" = "#4C72B0", "cotta" = "#DD8452"),
+    labels = c("bsl" = "Baseline", "cotta" = "CoTTA")
+  ) +
+  labs(
+    title = "Accuracy Comparison: Baseline (No Adaptation) vs CoTTA",
+    x = "Type",
+    y = "Accuracy",
+    colour = "Dataset"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_blank())
+  # theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggplot(df1.1, aes(x = severity, y = acc, colour = dataset, group = dataset)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  scale_colour_manual(
+    values = c("bsl" = "#4C72B0", "cotta" = "#DD8452"),
+    labels = c("bsl" = "Baseline", "cotta" = "CoTTA")
+  ) +
+  facet_wrap(~ corruption) +
+  labs(title = "Accuracy Comparison: Baseline (No Adaptation) vs CoTTA",
+       x = "Severity", y = "Accuracy (%)", colour = "Dataset") +
+  theme_minimal()
+```
+
+## Comparing speed of [BASELINE]{.underline} vs [COTTA]{.underline}
+
+```{r echo=FALSE}
+# Combine datasets 
+bsl.2 <- bsl %>% 
+  rename(acc = accuracy_top1) %>%
+  arrange(timestamp) %>%
+  mutate(speed = as.numeric(difftime(timestamp, lag(timestamp), units = "secs")),
+         dataset = "BSL") %>%
+  select(acc, speed, dataset, severity)
+
+cotta.2 <- cotta %>%
+  rename(acc = accuracy_top1) %>%
+  arrange(timestamp) %>%
+  mutate(speed = as.numeric(difftime(timestamp, lag(timestamp), units = "secs")),
+         dataset = "CoTTA") %>%
+  select(acc, speed, dataset, severity)
+
+df1.2 <- bind_rows(bsl.2, cotta.2)
+
+df_severity <- df1.2 %>%
+  filter(!is.na(speed)) %>%
+  group_by(dataset, severity) %>%
+  summarise(mean_acc = mean(acc), mean_speed = mean(speed), .groups = "drop")
+
+ggplot(df_severity, aes(x = severity, y = mean_speed, colour = dataset, group = dataset)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  facet_wrap(~ dataset, scales = "free_y") +          # <-- added
+  scale_colour_manual(values = c("BSL" = "#4C72B0", "CoTTA" = "#DD8452"),
+                      labels = c("BSL" = "Baseline", "CoTTA" = "CoTTA")) +
+  labs(title = "Mean Speed by Severity: Baseline vs CoTTA",
+       x = "Severity", y = "Mean Speed (secs)",
+       colour = "Dataset") +
+  theme_minimal() +
+  theme(legend.position = "none")                     # <-- legend is redundant with facet labels
+
+```
+
+# DA-TTA
+
+```{r echo=FALSE}
+# Filter TTAB baseline to severity 5 only
+bsl2 <- bsl %>%
+  filter(severity == 5) %>%
+  rename(acc = accuracy_top1) %>%
+  mutate(method = "Baseline (ResNet-26)")
+
+# Load and combine DA-TTA results
+datta_01 <- read_excel("DATTA_results_01.xlsx") %>%
+  filter(!is.na(accuracy_top1)) %>%
+  rename(acc = accuracy_top1) %>%
+  mutate(method = "DA-TTA α=0.1")
+
+datta_05 <- read_excel("DATTA_results_05.xlsx") %>%
+  rename(acc = accuracy_top1) %>%
+  mutate(method = "DA-TTA α=0.5")
+
+datta_10 <- read_excel("DATTA_results_10.xlsx") %>%
+  rename(acc = accuracy_top1) %>%
+  mutate(method = "DA-TTA α=1.0")
+
+df2 <- bind_rows(bsl2, datta_01, datta_05, datta_10) %>%
+  select(corruption_type, acc, method)
+```
+
+## Comparing accuracy of [BASELINE]{.underline}, [DA-TTA]{.underline}
+
+Please note that BASELINE and DA-TTA are built on two different models, specializing in two different things (baseline is looking at i.i.d. data, da-tta is not).
+
+Since DA-TTA was only run on severity 5, we fix severity, change corruption type, and accuracy of method.
+
+```{r echo=FALSE}
+ggplot(df2, aes(x = reorder(corruption_type, acc), y = acc, colour = method, group = method)) +
+  geom_point(size = 3) +
+  geom_line() +
+  coord_flip() +
+  scale_colour_manual(values = c(
+    "Baseline (ResNet-26)" = "#4C72B0",
+    "DA-TTA α=0.1"        = "#DD8452",
+    "DA-TTA α=0.5"        = "#59A14F",
+    "DA-TTA α=1.0"        = "#B07AA1"
+  )) +
+  labs(title = "Accuracy at Severity 5: Baseline vs DA-TTA",
+       x = "Corruption Type", y = "Accuracy (%)",
+       caption = "Note: Baseline uses ResNet-26 (TTAB); DA-TTA uses WideResNet-28 (RobustBench)") +
+  theme_minimal()
+
+ggplot(df2, aes(x = method, y = acc, fill = method)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ corruption_type, ncol = 5) +
+  scale_fill_manual(values = c(
+    "Baseline (ResNet-26)" = "#4C72B0",
+    "DA-TTA α=0.1"        = "#DD8452",
+    "DA-TTA α=0.5"        = "#59A14F",
+    "DA-TTA α=1.0"        = "#B07AA1"
+  )) +
+  labs(title = "Accuracy at Severity 5 by Corruption Type: Baseline vs DA-TTA",
+       x = NULL, y = "Accuracy (%)", fill = "Method",
+       caption = "Note: Baseline uses ResNet-26 (TTAB); DA-TTA uses WideResNet-28 (RobustBench)") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+```
+
+# LATTA
+
+Loading LATTA
+
+```{r echo=FALSE, message=FALSE}
+latta_lr <- read_csv("latta_lr.csv") %>%
+  rename(acc = accuracy_top1) %>%
+  mutate(
+    batch_label = paste0("Batch size = ", batch_size),
+    method = adaptation_method
+  )
+
+latta_params <- read_csv("latta_param_effects.csv") %>%
+  rename(acc = accuracy_top1) %>%
+  mutate(noise_scale = factor(latta_noise_scale),
+         anchor_weight = factor(latta_anchor_weight))
+```
+
+Langevin noise scale has negligible impact on accuracy, shown by the overlapping lines on the graph.
+
+LATTA's performance decreases as anchor weights increase. Higher anchor weights actively hurt performance.
+
+```{r}
+ggplot(latta_params, aes(x = anchor_weight, y = acc, colour = noise_scale, group = noise_scale)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  labs(title = "LATTA Accuracy by Anchor Weight and Noise Scale",
+       x = "Anchor Weight", y = "Accuracy (%)", colour = "Noise Scale",
+       caption = "Gaussian noise, severity 5, batch size 8, lr=0.001.") +
+  theme_minimal() +
+  theme(plot.caption = element_text(hjust = 0.5))
+```
+
+At n_train_steps=10, LATTA is more robust to learning rate increases than TENT, particularly at batch size 64, though both methods degrade significantly at lr=0.05.
+
+```{r}
+ggplot(latta_lr, aes(x = factor(lr), y = acc, colour = method, group = method)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  facet_wrap(~ batch_label) +
+  scale_colour_manual(values = c("latta" = "#855399", "tent" = "#91c474"),
+                      labels = c("latta" = "LATTA", "tent" = "TENT")) +
+  labs(
+    title = "Accuracy vs Learning Rate: LATTA vs TENT",
+    x = "Learning Rate", y = "Accuracy (%)", colour = "Method",
+    caption = "Gaussian noise, severity 3. n_train_steps=10."
+  ) +
+  theme_minimal() +
+  theme(plot.caption = element_text(hjust = 0.5))
+```
+
+# EATA
+
+Importing EATA. This data is from March 21 before all the severities were run.
+
+```{r echo=FALSE, message=FALSE}
+eata_lr <- read_csv("eata_lr.csv") %>%
+  rename(acc = accuracy_top1) %>%
+  group_by(adaptation_method, lr, corruption_type) %>%
+  summarise(mean_acc = mean(acc), .groups = "drop")
+
+eata_bs <- read_csv("eata_bs.csv") %>%
+  rename(acc = accuracy_top1) %>%
+  group_by(adaptation_method, batch_size, corruption_type) %>%
+  summarise(mean_acc = mean(acc), .groups = "drop")
+```
+
+## Comparing accuracy of [EATA]{.underline} vs. [SAR]{.underline} vs. [TENT]{.underline} with regards to learning rate (LR)
+
+EATA is very flat across all learning rates. Meanwhile, TENT and SAR consistently outperform EATA until lr=0.05, where their performance drops to the same level or worse as EATA's (with regards to jpeg_compression).
+
+```{r}
+ggplot(eata_lr, aes(x = factor(lr), y = mean_acc, colour = adaptation_method, group = adaptation_method)) +
+  geom_line(linewidth = 0.8) +
+  geom_point(size = 2) +
+  facet_wrap(~ corruption_type) +
+  scale_colour_manual(values = c("eata" = "#de8ad4", "sar" = "#13367d", "tent" = "#91c474"),
+                      labels = c("eata" = "EATA", "sar" = "SAR", "tent" = "TENT")) +
+  labs(title = "Mean Severity Accuracy vs Learning Rate",
+       x = "Learning Rate", y = "Mean Accuracy (%)", colour = "Method",
+       caption = "CIFAR-10, batch size 64, averaged across severities") +
+  theme_minimal() +
+  theme(plot.caption = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Comparing accuracy of [EATA]{.underline} vs. [SAR]{.underline} vs. [TENT]{.underline} with regards to batch size (BS)
+
+EATA performs consistently and significantly worse at small batch sizes compared to TENT and SAR. This is likely due to the sample filtering being too aggressive for our use case (a relatively small dataset and model).
+
+By comparison, the performance of TENT and SAR are more stable across different batch sizes.
+
+```{r}
+ggplot(eata_bs, aes(x = factor(batch_size), y = mean_acc, colour = adaptation_method, group = adaptation_method)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  facet_wrap(~ corruption_type) +
+  scale_colour_manual(values = c("eata" = "#de8ad4", "sar" = "#13367d", "tent" = "#91c474"),
+                      labels = c("eata" = "EATA", "sar" = "SAR", "tent" = "TENT")) +
+  labs(title = "Mean Severity Accuracy vs Batch Size",
+       x = "Batch Size", y = "Mean Accuracy (%)", colour = "Method",
+       caption = "CIFAR-10, lr = 0.001, averaged across severities") +
+  theme_minimal() +
+  theme(plot.caption = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## 

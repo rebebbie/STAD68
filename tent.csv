@@ -1,0 +1,76 @@
+﻿base_data_name,model_name,adaptation_method,selection_method,batch_size,seed,shift_type,corruption_type,severity,cross_entropy,accuracy_top1
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Gaussian Noise,1,0.589263929,81.14
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Gaussian Noise,2,0.826208301,74.6
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Gaussian Noise,3,1.062795651,68.97
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Gaussian Noise,4,1.188643061,65.61
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Gaussian Noise,5,1.315306562,62.84
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Brightness,1,0.330365549,88.76
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Brightness,2,0.338128651,88.69
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Brightness,3,0.349939309,88.04
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Brightness,4,0.366357676,87.87
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Brightness,5,0.411780666,86.57
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Contrast,1,0.337864127,88.75
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Contrast,2,0.372786935,87.61
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Contrast,3,0.396785816,86.83
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Contrast,4,0.437334939,85.43
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Contrast,5,0.547938493,82.09
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Defocus Blur,1,0.328317024,88.97
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Defocus Blur,2,0.332802685,88.89
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Defocus Blur,3,0.347672613,88.43
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Defocus Blur,4,0.399524243,86.56
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Defocus Blur,5,0.525578797,83.3
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Frost,1,0.443541541,85.18
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Frost,2,0.563059897,82.14
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Frost,3,0.700488802,78.12
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Frost,4,0.727410264,78
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Frost,5,0.870882788,73.81
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Gaussian Blur,1,0.328167412,88.97
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Gaussian Blur,2,0.347648275,88.4
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Gaussian Blur,3,0.382885547,87.11
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Gaussian Blur,4,0.439122429,85.43
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Gaussian Blur,5,0.601456741,81.11
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Elastic Transform,1,0.477130727,84.69
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Elastic Transform,2,0.46502835,85.11
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Elastic Transform,3,0.485651351,84.16
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Elastic Transform,4,0.682676642,78.85
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Elastic Transform,5,0.963654365,71.28
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Glass Blur,1,0.986462248,70.84
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Glass Blur,2,1.010972011,70.05
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Glass Blur,3,0.976957375,70.54
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Glass Blur,4,1.422269663,60.97
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Glass Blur,5,1.412573323,60.8
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Impulse Noise,1,0.545663027,82.6
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Impulse Noise,2,0.729803239,77.19
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Impulse Noise,3,0.901277052,73.15
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Impulse Noise,4,1.282259926,63.58
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Impulse Noise,5,1.628666283,56.02
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Saturate,1,0.368396435,87.65
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Saturate,2,0.430294265,85.93
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Saturate,3,0.328380417,88.88
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Saturate,4,0.353168066,88.19
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Saturate,5,0.394544967,86.97
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Jpeg Compression,1,0.642761972,80.3
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Jpeg Compression,2,0.835762324,74.68
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Jpeg Compression,3,0.906854353,72.88
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Jpeg Compression,4,1.006400243,70.41
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Jpeg Compression,5,1.164639986,67.26
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Motion Blur,1,0.398034706,87.32
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Motion Blur,2,0.449142805,85.53
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Motion Blur,3,0.531644848,82.76
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Motion Blur,4,0.538578558,82.57
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Motion Blur,5,0.603217201,81.02
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Pixelate,1,0.403813509,86.76
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Pixelate,2,0.46759413,84.77
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Pixelate,3,0.508502697,83.71
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Pixelate,4,0.641404098,80.06
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Pixelate,5,0.897650361,72.7
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Shot Noise,1,0.51368073,83.26
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Shot Noise,2,0.623067431,80.23
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Shot Noise,3,0.922105268,72.35
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Shot Noise,4,1.03670035,69.89
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Shot Noise,5,1.277652665,63.65
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Fog,1,0.333577899,88.72
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Fog,2,0.34873443,88.42
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Fog,3,0.390399025,87.34
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Fog,4,0.433632821,85.83
+cifar10-c,resnet26,tent,last_iterate,8,2022,synthetic,Fog,5,0.642173593,80.28
