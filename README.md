@@ -4,9 +4,13 @@ Supplementary materials for Sun Qiang's course "STAD68" at the University of Tor
 
 
 
-**graphs.qmd**  is the R markdown file (saved as Quarto Markdown File type) used to generate all of our graphs. The relevant data files (saved as either .csv or .xlsx) are noted in the code blocks of this file. 
+**graphs.qmd**  is the R markdown file (saved as Quarto Markdown File type) used to generate all of our graphs. The relevant data files (saved as either .csv or .xlsx) are noted in the code blocks of this file.
 
 
 
-**QMD Figures (Graphs)** is a folder containing the graphs generated through the graphs.qmd file. These graphs are saved as PDFs. 
+**QMD Figures (Graphs)** is a folder containing the graphs generated through the graphs.qmd file. These graphs are saved as PDFs.
+
+
+
+**resnet26\_with\_head-110-regular-0.9246000051498413.pth** The weights of our TTAB baseline model.
 
